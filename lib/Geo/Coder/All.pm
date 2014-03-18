@@ -1,18 +1,37 @@
 package Geo::Coder::All;
-
-#use strict;
-#use warnings FATAL => 'all';
+use Modern::Perl;
 use Moose;
 use Geo::Coder::Google;
+#use Geo::Coder::Osm;
+my %VALID_GEOCODER = map { $_ => 1} qw(
+    Google
+    Osm
+);
+has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'google');
 
-has 'geocoder' => (
+has 'geocoder_engine' => (
     is  => 'rw',
+    init_arg => undef,
+    lazy => 1,
     isa => 'Object',
-    default => sub { Geo::Coder::Google->new(); },
+    builder => '_build_geocoder_engine',
     handles =>{
         geocode => 'geocode_local'
         } 
     );
+
+sub _build_geocoder_engine {
+    my $self        = shift;
+    my $geocoder    = ucfirst lc $self->geocoder;
+    
+    unless($VALID_GEOCODER{$geocoder}){ 
+        $geocoder = 'Google';
+        $self->geocoder('google');
+    }
+    
+    my $class = 'Geo::Coder::'.$geocoder;
+    return $class->new(); 
+}
 
 =head1 NAME
 
