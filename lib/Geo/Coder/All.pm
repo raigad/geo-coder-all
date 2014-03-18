@@ -1,8 +1,18 @@
 package Geo::Coder::All;
 
-use 5.006;
-use strict;
-use warnings FATAL => 'all';
+#use strict;
+#use warnings FATAL => 'all';
+use Moose;
+use Geo::Coder::Google;
+
+has 'geocoder' => (
+    is  => 'rw',
+    isa => 'Object',
+    default => sub { Geo::Coder::Google->new(); },
+    handles =>{
+        geocode => 'geocode_local'
+        } 
+    );
 
 =head1 NAME
 
