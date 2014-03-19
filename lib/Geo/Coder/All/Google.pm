@@ -1,5 +1,5 @@
 package Geo::Coder::All::Google;
-
+use Modern::Perl;
 use Moose;
 use Carp;
 use namespace::autoclean;

@@ -2,12 +2,13 @@ package Geo::Coder::All;
 use Modern::Perl;
 use Moose;
 use Geo::Coder::All::Google;
+use Geo::Coder::All::OSM;
 #use Geo::Coder::Osm;
-my %VALID_GEOCODER = map { $_ => 1} qw(
+my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Google
-    Osm
+    OSM
 );
-has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'google');
+has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
 
 has 'geocoder_engine' => (
     is  => 'rw',
@@ -22,14 +23,16 @@ has 'geocoder_engine' => (
 
 sub _build_geocoder_engine {
     my $self        = shift;
-    my $geocoder    = ucfirst lc $self->geocoder;
+    my $geocoder    = $self->geocoder;
     
-    unless($VALID_GEOCODER{$geocoder}){ 
+    unless($VALID_GEOCODER_LIST{$geocoder}){
+        print STDERR "using defailt geocoder ";
         $geocoder = 'Google';
-        $self->geocoder('google');
+        $self->geocoder('Google');
     }
     
     my $class = 'Geo::Coder::All::'.$geocoder;
+    print STDERR "my class= $class \n";
     return $class->new(); 
 }
 

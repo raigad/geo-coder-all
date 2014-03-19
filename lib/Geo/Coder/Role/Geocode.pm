@@ -15,7 +15,6 @@ sub get {
     my $self = shift;
     my $uri = shift;
     my $response = $self->ua->get($uri);
-    #print STDERR Dumper($response); 
     #TODO: add actual error message from uri
     croak "Request Failed" unless $response->{success};
     return $response->{content};
