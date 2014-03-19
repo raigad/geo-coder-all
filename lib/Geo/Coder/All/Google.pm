@@ -1,4 +1,4 @@
-package Geo::Coder::Google;
+package Geo::Coder::All::Google;
 
 use Moose;
 use Carp;

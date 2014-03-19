@@ -1,7 +1,7 @@
 package Geo::Coder::All;
 use Modern::Perl;
 use Moose;
-use Geo::Coder::Google;
+use Geo::Coder::All::Google;
 #use Geo::Coder::Osm;
 my %VALID_GEOCODER = map { $_ => 1} qw(
     Google
@@ -29,7 +29,7 @@ sub _build_geocoder_engine {
         $self->geocoder('google');
     }
     
-    my $class = 'Geo::Coder::'.$geocoder;
+    my $class = 'Geo::Coder::All::'.$geocoder;
     return $class->new(); 
 }
 
