@@ -1,8 +1,11 @@
 package Geo::Coder::All::Google;
 use Modern::Perl;
 use Moose;
-use Carp;
 use namespace::autoclean;
+use Carp;
+use URI::Escape;
+use JSON::XS;
+use Data::Dumper;
 with 'Geo::Coder::Role::Geocode';
 has 'base_api_uri' => (
     is          => 'ro',
@@ -14,7 +17,20 @@ has 'base_api_uri' => (
 sub geocode_local {
     my ($self,$rh_args)= @_;
     croak "Adress needed" unless ($rh_args->{address});
-    return $self->get($self->base_api_uri.($rh_args->{address}));
+    my $rh_data;
+    my $rh_response = decode_json($self->get($self->base_api_uri.uri_escape_utf8($rh_args->{address})));
+    return $rh_response->{results};
+    #if(!$rh_args->{data} || $rh_args->{data} eq 'cordinates'){
+    #    foreach my $result (@{$rh_response->{results}}){
+    #        push @{$rh_data}, {coordinates => $result->{geometry}{location}} ;
+    #    }
+    #}
+    #if(!$rh_args->{data} || $rh_args->{data} eq ''){
+    #    foreach my $result (@{$rh_response->{results}}){
+    #        push @{$rh_data}, {coordinates => $result->{geometry}{location}} ;
+    #    }
+    #}
+    #return $rh_data;
 }
 __PACKAGE__->meta->make_immutable;
 1;

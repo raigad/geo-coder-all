@@ -3,6 +3,8 @@ use Modern::Perl;
 use Moose;
 use Geo::Coder::All::Google;
 use Geo::Coder::All::OSM;
+use URI::Escape;
+use Data::Dumper;
 #use Geo::Coder::Osm;
 my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Google
@@ -26,13 +28,11 @@ sub _build_geocoder_engine {
     my $geocoder    = $self->geocoder;
     
     unless($VALID_GEOCODER_LIST{$geocoder}){
-        print STDERR "using defailt geocoder ";
         $geocoder = 'Google';
         $self->geocoder('Google');
     }
     
     my $class = 'Geo::Coder::All::'.$geocoder;
-    print STDERR "my class= $class \n";
     return $class->new(); 
 }
 
@@ -71,15 +71,10 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =cut
 
-sub function1 {
-}
-
 =head2 function2
 
 =cut
 
-sub function2 {
-}
 
 =head1 AUTHOR
 
