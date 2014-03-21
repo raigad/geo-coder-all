@@ -20,17 +20,6 @@ sub geocode_local {
     my $rh_data;
     my $rh_response = decode_json($self->get($self->base_api_uri.uri_escape_utf8($rh_args->{address})));
     return $rh_response->{results};
-    #if(!$rh_args->{data} || $rh_args->{data} eq 'cordinates'){
-    #    foreach my $result (@{$rh_response->{results}}){
-    #        push @{$rh_data}, {coordinates => $result->{geometry}{location}} ;
-    #    }
-    #}
-    #if(!$rh_args->{data} || $rh_args->{data} eq ''){
-    #    foreach my $result (@{$rh_response->{results}}){
-    #        push @{$rh_data}, {coordinates => $result->{geometry}{location}} ;
-    #    }
-    #}
-    #return $rh_data;
 }
 __PACKAGE__->meta->make_immutable;
 1;
