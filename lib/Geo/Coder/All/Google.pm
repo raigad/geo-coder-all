@@ -19,7 +19,15 @@ sub geocode_local {
     croak "Adress needed" unless ($rh_args->{address});
     my $rh_data;
     my $rh_response = decode_json($self->get($self->base_api_uri.uri_escape_utf8($rh_args->{address})));
-    return $rh_response->{results};
+    $rh_data->{address}         = $rh_response->{results}->[0]->{formatted_address} ;
+    $rh_data->{coordinates}     = $rh_response->{results}->[0]->{geometry}{location} ;
+    foreach my $component (@{$rh_response->{results}->[0]->{address_components}}){
+        if($component->{types}->[0] =~ /country/){
+            $rh_data->{country_code} = $component->{short_name};
+            $rh_data->{country} = $component->{long_name};
+        }
+    }
+    return $rh_data;
 }
 __PACKAGE__->meta->make_immutable;
 1;
