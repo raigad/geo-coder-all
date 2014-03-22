@@ -19,6 +19,7 @@ sub geocode_local {
     croak "Adress needed" unless ($rh_args->{address});
     my $rh_data;
     my $rh_response = decode_json($self->get($self->base_api_uri.uri_escape_utf8($rh_args->{address})));
+    $rh_data->{geocoder}        = 'Google';
     $rh_data->{address}         = $rh_response->{results}->[0]->{formatted_address} ;
     $rh_data->{coordinates}     = $rh_response->{results}->[0]->{geometry}{location} ;
     foreach my $component (@{$rh_response->{results}->[0]->{address_components}}){
