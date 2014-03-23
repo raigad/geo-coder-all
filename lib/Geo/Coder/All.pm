@@ -1,5 +1,5 @@
 package Geo::Coder::All;
-use Modern::Perl;
+#use Modern::Perl;
 use Moose;
 use Geo::Coder::All::Google;
 use Geo::Coder::All::OSM;
@@ -13,6 +13,9 @@ my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     TomTom
 );
 has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
+
+has 'langauge' => (is=>'rw',isa=>'Str',init_arg=>'language',default=>'en',reader=>'get_language');
+has 'google_apiver' => (is=>'rw',isa=>'Str',init_arg=>'apiver',default=>'en',reader=>'get_google_apiver');
 
 has 'geocoder_engine' => (
     is  => 'rw',
@@ -38,6 +41,12 @@ sub _build_geocoder_engine {
     return $class->new(); 
 }
 
+around 'geocode' => sub{
+    my ($orig,$class,$rh_args) =  @_;
+    $rh_args->{language}= $class->get_language if($class->get_language);
+    $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Google');
+    return $class->$orig($rh_args);
+};
 =head1 NAME
 
 Geo::Coder::All - The great new Geo::Coder::All!
