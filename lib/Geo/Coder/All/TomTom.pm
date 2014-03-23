@@ -14,9 +14,9 @@ has 'TomTom' => (
 
 sub geocode_local {
     my ($self,$rh_args) = @_;
-    croak "Address required" unless ($rh_args->{address});
+    croak "Location string required" unless ($rh_args->{location});
     my $rh_data;
-    my $rh_response = $self->TomTom->geocode(location => $rh_args->{address} );
+    my $rh_response = $self->TomTom->geocode(location => $rh_args->{location} );
     $rh_data->{geocoder} = 'TomTom';  
     $rh_data->{address} = $rh_response->{formattedAddress};  
     $rh_data->{country} = $rh_response->{country};

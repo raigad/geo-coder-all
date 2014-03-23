@@ -16,9 +16,9 @@ has 'base_api_uri' => (
 
 sub geocode_local {
     my ($self,$rh_args)= @_;
-    croak "Adress needed" unless ($rh_args->{address});
+    croak "Location string needed" unless ($rh_args->{location});
     my $rh_data;
-    my $rh_response = decode_json($self->get($self->base_api_uri.uri_escape_utf8($rh_args->{address})));
+    my $rh_response = decode_json($self->get($self->base_api_uri.uri_escape_utf8($rh_args->{location})));
     $rh_data->{geocoder}        = 'Google';
     $rh_data->{address}         = $rh_response->{results}->[0]->{formatted_address} ;
     $rh_data->{coordinates}     = $rh_response->{results}->[0]->{geometry}{location} ;

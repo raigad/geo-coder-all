@@ -14,8 +14,8 @@ has 'OSM' => (
 
 sub geocode_local{
     my ($self,$rh_args) = @_;
-    croak "Adress needed" unless ($rh_args->{address});    
-    my $rh_response = $self->OSM->geocode(location => $rh_args->{address});
+    croak "Location String needed" unless ($rh_args->{location});    
+    my $rh_response = $self->OSM->geocode(location => $rh_args->{location});
     my $rh_data;
     $rh_data->{geocoder}        = 'OSM';
     $rh_data->{address}         = $rh_response->{display_name};
