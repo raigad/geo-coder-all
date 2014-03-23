@@ -3,12 +3,14 @@ use Modern::Perl;
 use Moose;
 use Geo::Coder::All::Google;
 use Geo::Coder::All::OSM;
+use Geo::Coder::All::TomTom;
 use URI::Escape;
 use Data::Dumper;
 #use Geo::Coder::Osm;
 my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Google
     OSM
+    TomTom
 );
 has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
 
