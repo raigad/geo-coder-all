@@ -5,6 +5,7 @@ use namespace::autoclean;
 use Carp;
 use Geo::Coder::OSM;
 use Data::Dumper;
+use Locale::Codes::Country;
 with 'Geo::Coder::Role::Geocode';
 has 'OSM' => (
     is      =>  'ro',
@@ -23,6 +24,7 @@ sub geocode_local{
     $rh_data->{coordinates}{lat}= $rh_response->{lat};
     $rh_data->{coordinates}{lon}= $rh_response->{lon};
     $rh_data->{country}         = $rh_response->{address}{country};
+    $rh_data->{country_code_alpha_3} = uc(country2code($rh_response->{address}{country},'alpha-3'));
     $rh_data->{country_code}    = uc($rh_response->{address}{country_code});
     return $rh_data;
 }

@@ -4,6 +4,7 @@ use namespace::autoclean;
 use Geo::Coder::TomTom;
 use Carp;
 use Data::Dumper;
+use Locale::Codes::Country;
 with 'Geo::Coder::Role::Geocode';
 
 has 'TomTom' => (
@@ -22,7 +23,8 @@ sub geocode_local {
     $rh_data->{address} = $rh_response->{formattedAddress};  
     $rh_data->{country} = $rh_response->{country};
     #TODO: get country code using Locale::Codes module
-    $rh_data->{country_code} = undef;
+    $rh_data->{country_code} = uc(country2code($rh_response->{country},'alpha-2'));
+    $rh_data->{country_code_alpha_3} = uc(country2code($rh_response->{country},'alpha-3'));
     $rh_data->{coordinates}{lat} = $rh_response->{latitude};  
     $rh_data->{coordinates}{lon} = $rh_response->{longitude};  
     return $rh_data;

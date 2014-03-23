@@ -5,6 +5,7 @@ use namespace::autoclean;
 use Carp;
 use URI::Escape;
 use JSON::XS;
+use Locale::Codes::Country;
 use Data::Dumper;
 with 'Geo::Coder::Role::Geocode';
 has 'base_api_uri' => (
@@ -29,6 +30,7 @@ sub geocode_local {
             $rh_data->{country} = $component->{long_name};
         }
     }
+    $rh_data->{country_code_alpha_3} = uc(country2code($rh_data->{country},'alpha-3'));
     return $rh_data;
 }
 __PACKAGE__->meta->make_immutable;
