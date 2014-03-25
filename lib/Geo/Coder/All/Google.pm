@@ -20,7 +20,9 @@ sub geocode_local {
     my $rh_data;
     $self->set_google_geocoder(Geo::Coder::Google->new(
         language    => $rh_args->{language},
-        ($rh_args->{google_apiver} ? (apiver => $rh_args->{google_apiver}): () ),
+        apiver      => 3,
+        #TODO: findout why v2 does not work
+        #($rh_args->{google_apiver} ? (apiver => $rh_args->{google_apiver}): () ),
     ));
     my $rh_response = $self->GOOGLE->geocode(location => $rh_args->{location});
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});

@@ -4,6 +4,7 @@ use Moose;
 use Geo::Coder::All::Google;
 use Geo::Coder::All::OSM;
 use Geo::Coder::All::TomTom;
+use Geo::Coder::All::Ovi;
 use URI::Escape;
 use Data::Dumper;
 #use Geo::Coder::Osm;
@@ -11,11 +12,12 @@ my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Google
     OSM
     TomTom
+    Ovi
 );
 has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
 
 has 'langauge' => (is=>'rw',isa=>'Str',init_arg=>'language',default=>'en',reader=>'get_language');
-has 'google_apiver' => (is=>'rw',isa=>'Str',init_arg=>'apiver',default=>'en',reader=>'get_google_apiver');
+has 'google_apiver' => (is=>'rw',isa=>'Str',init_arg=>'apiver',default=>3,reader=>'get_google_apiver');
 
 has 'geocoder_engine' => (
     is  => 'rw',
