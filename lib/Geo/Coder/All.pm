@@ -5,6 +5,7 @@ use Geo::Coder::All::Google;
 use Geo::Coder::All::OSM;
 use Geo::Coder::All::TomTom;
 use Geo::Coder::All::Ovi;
+use Geo::Coder::All::Bing;
 use URI::Escape;
 use Data::Dumper;
 #use Geo::Coder::Osm;
@@ -13,8 +14,10 @@ my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     OSM
     TomTom
     Ovi
+    Bing
 );
 has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
+has 'api_key' => (is=>'rw',isa=>'Str','default'=> undef,init_arg=>'key',reader=>'get_api_key');
 
 has 'langauge' => (is=>'rw',isa=>'Str',init_arg=>'language',default=>'en',reader=>'get_language');
 has 'google_apiver' => (is=>'rw',isa=>'Str',init_arg=>'apiver',default=>3,reader=>'get_google_apiver');
@@ -45,6 +48,7 @@ sub _build_geocoder_engine {
 
 around 'geocode' => sub{
     my ($orig,$class,$rh_args) =  @_;
+    $rh_args->{api_key}= $class->get_api_key if($class->get_api_key);
     $rh_args->{language}= $class->get_language if($class->get_language);
     $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Google');
     return $class->$orig($rh_args);
