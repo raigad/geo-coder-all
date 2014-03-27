@@ -26,14 +26,16 @@ sub geocode_local {
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
     $rh_data->{geocoder}        = 'Bing';
     $rh_data->{address}         = $rh_response->{address}{formattedAddress} ;
-    #$rh_data->{coordinates}{lat}     = $rh_response->{'point'}{'coordinates'} ;
-    #foreach my $component (@{$rh_response->{address_components}}){
-    #    if($component->{types}->[0] =~ /country/){
-    #        $rh_data->{country_code} = $component->{short_name};
-    #        $rh_data->{country} = $component->{long_name};
-    #        $rh_data->{country_code_alpha_3} = uc(country2code(code2country($rh_data->{country_code}),'alpha-3')) if($component->{short_name});
-    #    }
-    #}
+    $rh_data->{country}         = $rh_response->{address}{countryRegion} ;
+    $rh_data->{country_code}    = uc(country2code($rh_data->{country})) if($rh_data->{country});
+    $rh_data->{country_code_alpha_3} = uc(country2code($rh_data->{country},'alpha-3')) ;
+    if( $rh_response->{point}{type} eq 'Point' && @{$rh_response->{point}{coordinates}} == 2){
+        $rh_data->{coordinates}{lat} = $rh_response->{point}{coordinates}[0];
+        $rh_data->{coordinates}{lon} = $rh_response->{point}{coordinates}->[1];
+    }
+
+
+
     return $rh_data;
 }
 __PACKAGE__->meta->make_immutable;
