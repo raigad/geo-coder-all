@@ -17,10 +17,10 @@ my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Bing
 );
 has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
-has 'api_key' => (is=>'rw',isa=>'Str','default'=> undef,init_arg=>'key',reader=>'get_api_key');
+has 'api_key' => (is=>'rw',isa=>'Str','default'=> 'no_key',init_arg=>'key',reader=>'get_api_key');
 
 has 'langauge' => (is=>'rw',isa=>'Str',init_arg=>'language',default=>'en',reader=>'get_language');
-has 'google_apiver' => (is=>'rw',isa=>'Str',init_arg=>'apiver',default=>3,reader=>'get_google_apiver');
+has 'google_apiver' => (is=>'rw',isa=>'Num',init_arg=>'apiver',default=>3,reader=>'get_google_apiver');
 
 has 'geocoder_engine' => (
     is  => 'rw',

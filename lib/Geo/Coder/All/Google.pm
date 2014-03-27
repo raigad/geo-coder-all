@@ -28,7 +28,7 @@ sub geocode_local {
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
     $rh_data->{geocoder}        = 'Google';
     $rh_data->{address}         = $rh_response->{formatted_address} ;
-    $rh_data->{coordinates}     = $rh_response->{geometry}{location} ;
+    @{$rh_data->{coordinates}}{qw/lat lon/}     = @{$rh_response->{geometry}{location}}{qw/lat lng/} ;
     foreach my $component (@{$rh_response->{address_components}}){
         if($component->{types}->[0] =~ /country/){
             $rh_data->{country_code} = $component->{short_name};
