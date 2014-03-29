@@ -21,6 +21,7 @@ sub geocode_local {
     $self->set_google_geocoder(Geo::Coder::Google->new(
         language    => $rh_args->{language},
         apiver      => 3,
+        ($rh_args->{key} ? ( key    => $rh_args->{key}):()),
         #TODO: findout why v2 does not work
         #($rh_args->{google_apiver} ? (apiver => $rh_args->{google_apiver}): () ),
     ));
