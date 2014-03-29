@@ -35,6 +35,9 @@ sub geocode_local {
             $rh_data->{country} = $component->{long_name};
             $rh_data->{country_code_alpha_3} = uc(country2code(code2country($rh_data->{country_code}),'alpha-3')) if($component->{short_name});
         }
+        if($component->{types}[0] =~ /postal_code/){
+            $rh_data->{postal_code} = $component->{long_name};    
+        }
     }
     return $rh_data;
 }
