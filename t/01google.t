@@ -3,11 +3,12 @@ use strict;
 use warnings;
 use Test::More;
 use Geo::Coder::All;
-plan tests => 7;
+plan tests => 8;
 {
 my $geocoder = Geo::Coder::All->new(apiver =>3);
 my $location =$geocoder->geocode({location=> 'Anfield'});
 isa_ok($geocoder->geocoder_engine->GOOGLE,'Geo::Coder::Google::V3');
+is($location->{geocoder},'Google','checking geocoder');
 is($location->{country},'United Kingdom','checking country');
 is($location->{country_code},'GB','checking country code ');
 is($location->{country_code_alpha_3},'GBR','checking country code alpha3');
