@@ -10,15 +10,19 @@ with 'Geo::Coder::Role::Geocode';
 has 'Ovi' =>(
     is  => 'rw',
     isa => 'Geo::Coder::Ovi',
-    default => sub {Geo::Coder::Ovi->new();},
+    writer => 'set_ovi_geocoder',
 );
 
 sub geocode_local {
     my ($self,$rh_args) = @_;
     croak 'Location string required' unless($rh_args->{location});
     my $rh_data;
+    $self->set_ovi_geocoder(Geo::Coder::Ovi->new(
+        appid   =>  $rh_args->{appid},
+        token   =>  $rh_args->{token}
+    )); 
     my $rh_response = $self->Ovi->geocode( location=> $rh_args->{location});
-    #print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
     $rh_data->{geocoder}                =   'Ovi';
     $rh_data->{address}                 =   $rh_response->{properties}{title};
     $rh_data->{country}                 =   $rh_response->{properties}{addrCountryName};
