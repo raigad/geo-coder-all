@@ -6,7 +6,7 @@ use Geo::Coder::All;
 plan tests => 8;
 {
 my $geocoder = Geo::Coder::All->new(apiver =>3);
-my $location =$geocoder->geocode({location=> 'Anfield'});
+my $location =$geocoder->geocode({location=> 'Anfield,Liverpool'});
 isa_ok($geocoder->geocoder_engine->GOOGLE,'Geo::Coder::Google::V3');
 is($location->{geocoder},'Google','checking geocoder');
 is($location->{country},'United Kingdom','checking country');
