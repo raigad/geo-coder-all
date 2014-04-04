@@ -28,6 +28,24 @@ sub geocode_local {
     ));
     my $rh_response = $self->GOOGLE->geocode(location => $rh_args->{location});
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return $self->_process_response($rh_response);
+}
+sub reverse_geocode_local{
+    my ($self,$rh_args) = @_;
+    croak 'latlng needed to reverse geocode' unless($rh_args->{latlng});
+    $self->set_google_geocoder(Geo::Coder::Google->new(
+        language    => $rh_args->{language},
+        apiver      => 3,
+        ($rh_args->{key} ? ( key    => $rh_args->{key}):()),
+        ($rh_args->{google_client} ? ( client    => $rh_args->{google_client}):()),
+    ));
+    my $rh_response = $self->GOOGLE->reverse_geocode(latlng => $rh_args->{latlng});
+    print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return $self->_process_response($rh_response);
+}
+sub _process_response {
+    my ($self,$rh_response) = @_;
+    my $rh_data;
     $rh_data->{geocoder}        = 'Google';
     $rh_data->{address}         = $rh_response->{formatted_address} ;
     @{$rh_data->{coordinates}}{qw/lat lon/}     = @{$rh_response->{geometry}{location}}{qw/lat lng/} ;

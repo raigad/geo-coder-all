@@ -30,7 +30,8 @@ has 'geocoder_engine' => (
     isa => 'Object',
     builder => '_build_geocoder_engine',
     handles =>{
-        geocode => 'geocode_local'
+        geocode         => 'geocode_local',
+        reverse_geocode => 'reverse_geocode_local'
         } 
     );
 
