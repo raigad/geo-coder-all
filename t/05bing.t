@@ -6,7 +6,7 @@ use Geo::Coder::All;
 if($ENV{BING_API_KEY}){
     plan tests => 8;
 }else{
-    plan skip_all => "No Bing Api key provided skipping tests for Bing Geocoder \n SET ENV variable BING_API_KEY=key";
+    plan skip_all => "No Bing Api key provided skipping tests for Bing Geocoder,SET ENV variable BING_API_KEY=key";
     exit;
 }
 {

@@ -5,7 +5,10 @@ use Test::More;
 use Geo::Coder::All;
 plan tests => 8;
 {
-my $geocoder = Geo::Coder::All->new(apiver =>3);
+my $geocoder = Geo::Coder::All->new(apiver =>3,
+    ($ENV{GMAP_KEY} ?(key=> $ENV{GMAP_KEY}):()) ,
+    ($ENV{GMAP_CLIENT} ?(client=> $ENV{GMAP_CLIENT}):()) ,
+);
 my $location =$geocoder->geocode({location=> 'Anfield,Liverpool'});
 isa_ok($geocoder->geocoder_engine->GOOGLE,'Geo::Coder::Google::V3');
 is($location->{geocoder},'Google','checking geocoder');
