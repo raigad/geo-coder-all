@@ -18,6 +18,7 @@ my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
 );
 has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
 has 'key' => (is=>'rw',isa=>'Str','default'=> '',reader=>'get_key');
+has 'google_client' => (is=>'rw',isa=>'Str','default'=> '',reader=>'get_google_client');
 
 has 'langauge' => (is=>'rw',isa=>'Str',init_arg=>'language',default=>'en',reader=>'get_language');
 has 'google_apiver' => (is=>'rw',isa=>'Num',init_arg=>'apiver',default=>3,reader=>'get_google_apiver');
@@ -51,6 +52,7 @@ around 'geocode' => sub{
     $rh_args->{key}= $class->get_key if($class->get_key);
     $rh_args->{language}= $class->get_language if($class->get_language);
     $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Google');
+    $rh_args->{google_client}= $class->get_google_client if($class->geocoder eq 'Google');
     return $class->$orig($rh_args);
 };
 =head1 NAME

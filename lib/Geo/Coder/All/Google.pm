@@ -22,6 +22,7 @@ sub geocode_local {
         language    => $rh_args->{language},
         apiver      => 3,
         ($rh_args->{key} ? ( key    => $rh_args->{key}):()),
+        ($rh_args->{google_client} ? ( client    => $rh_args->{google_client}):()),
         #TODO: findout why v2 does not work
         #($rh_args->{google_apiver} ? (apiver => $rh_args->{google_apiver}): () ),
     ));
