@@ -23,7 +23,7 @@ sub geocode_local {
 
 sub reverse_geocode_local{
     my ($self,$rh_args) = @_;
-    return 0;
+    return 'Reverse Geocode is not available for TomTom';
 }
 
 sub _process_response {
