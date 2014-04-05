@@ -16,9 +16,19 @@ has 'TomTom' => (
 sub geocode_local {
     my ($self,$rh_args) = @_;
     croak "Location string required" unless ($rh_args->{location});
-    my $rh_data;
     my $rh_response = $self->TomTom->geocode(location => $rh_args->{location} );
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return $self->_process_response($rh_response);
+}
+
+sub reverse_geocode_local{
+    my ($self,$rh_args) = @_;
+    return 0;
+}
+
+sub _process_response {
+    my ($self,$rh_response) = @_;   
+    my $rh_data;
     $rh_data->{geocoder} = 'TomTom';  
     $rh_data->{address} = $rh_response->{formattedAddress};  
     $rh_data->{country} = $rh_response->{country};
