@@ -24,6 +24,12 @@ sub geocode_local {
     ));
     my $rh_response = $self->Bing->geocode(location => $rh_args->{location});
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return $self->_process_response($rh_response);
+}
+
+sub _process_response{
+    my ($self,$rh_response ) = @_;
+    my $rh_data;
     $rh_data->{geocoder}        = 'Bing';
     return $rh_data unless($rh_response->{address});
     $rh_data->{address}         = $rh_response->{address}{formattedAddress} ;
