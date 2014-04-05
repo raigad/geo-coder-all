@@ -25,6 +25,11 @@ sub geocode_local {
     return  $self->_process_response($rh_response);
 }
 
+sub reverse_geocode_local{
+    my ($self,$rh_args) = @_;
+    return 'Reverse Geocode is not available for Ovi';
+}
+
 sub _process_response{
     my ($self,$rh_response) = @_;
     my $rh_data;
