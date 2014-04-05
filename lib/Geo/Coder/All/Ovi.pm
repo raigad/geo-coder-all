@@ -16,13 +16,18 @@ has 'Ovi' =>(
 sub geocode_local {
     my ($self,$rh_args) = @_;
     croak 'Location string required' unless($rh_args->{location});
-    my $rh_data;
     $self->set_ovi_geocoder(Geo::Coder::Ovi->new(
         appid   =>  $rh_args->{appid},
         token   =>  $rh_args->{token}
     )); 
     my $rh_response = $self->Ovi->geocode( location=> $rh_args->{location});
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return  $self->_process_response($rh_response);
+}
+
+sub _process_response{
+    my ($self,$rh_response) = @_;
+    my $rh_data;
     $rh_data->{geocoder}                =   'Ovi';
     $rh_data->{address}                 =   $rh_response->{properties}{title};
     $rh_data->{country}                 =   $rh_response->{properties}{addrCountryName};
@@ -30,9 +35,7 @@ sub geocode_local {
     $rh_data->{country_code_alpha_3}    =   $rh_response->{properties}{addrCountryCode};
     $rh_data->{coordinates}{lat}        =   $rh_response->{properties}{geoLatitude};
     $rh_data->{coordinates}{lon}        =   $rh_response->{properties}{geoLongitude};
-    return  $rh_data;
+    return $rh_data;
 }
-
-
 __PACKAGE__->meta->make_immutable();
 1;
