@@ -18,6 +18,19 @@ sub geocode_local{
     croak "Location String needed" unless ($rh_args->{location});    
     my $rh_response = $self->OSM->geocode(location => $rh_args->{location});
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return $self->_process_response($rh_response);
+}
+    
+sub reverse_geocode_local {
+    my ($self,$rh_args) = @_;
+    croak 'latlng needed to reverse geocode' unless($rh_args->{latlng});
+    my $rh_response = $self->OSM->reverse_geocode(latlng=>$rh_args->{latlng});
+    print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return $self->_process_response($rh_response);
+}
+
+sub _process_response {
+    my ($self,$rh_response) = @_;
     my $rh_data;
     $rh_data->{geocoder}        = 'OSM';
     $rh_data->{address}         = $rh_response->{display_name};
