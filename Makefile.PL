@@ -18,8 +18,16 @@ WriteMakefile(
         'Test::More' => 0,
     },
     PREREQ_PM => {
-        #'ABC'              => 1.6,
-        #'Foo::Bar::Module' => 5.0401,
+        'Moose'                     => 0,
+        'namespace::autoclean'      => 0,
+        'Data::Dumper'              => 0,
+        'Carp'                      => 0,
+        'Locale::Codes::Country'    => '3.30',
+        'Geo::Coder::Google'        => '0.14',
+        'Geo::Coder::Bing'          => '0.12',
+        'Geo::Coder::OSM'           => '0.03',
+        'Geo::Coder::Ovi'           => '0.03',
+        'Geo::Coder::TomTom'        => '0.03'
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Geo-Coder-All-*' },
