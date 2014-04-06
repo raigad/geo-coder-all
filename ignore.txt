@@ -2,6 +2,8 @@ Makefile
 Makefile.old
 Build
 Build.bat
+README.md
+.travis.yml
 META.*
 MYMETA.*
 .build/
