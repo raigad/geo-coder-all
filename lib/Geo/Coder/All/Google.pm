@@ -22,6 +22,9 @@ sub geocode_local {
         language    => $rh_args->{language},
         apiver      => 3,
         ($rh_args->{key} ? ( key    => $rh_args->{key}):()),
+        ($rh_args->{google_encoding} ? ( oe    => $rh_args->{google_encoding}):()),
+        ($rh_args->{google_country_code} ? ( region    => $rh_args->{google_country_code}):()),
+        ($rh_args->{google_sensor} ? ( sensor    => $rh_args->{google_sensor}):()),
         ($rh_args->{google_client} ? ( client    => $rh_args->{google_client}):()),
         #TODO: findout why v2 does not work
         #($rh_args->{google_apiver} ? (apiver => $rh_args->{google_apiver}): () ),
@@ -37,6 +40,9 @@ sub reverse_geocode_local{
         language    => $rh_args->{language},
         apiver      => 3,
         ($rh_args->{key} ? ( key    => $rh_args->{key}):()),
+        ($rh_args->{google_encoding} ? ( oe    => $rh_args->{google_encoding}):()),
+        ($rh_args->{google_country_code} ? ( region    => $rh_args->{google_country_code}):()),
+        ($rh_args->{google_sensor} ? ( sensor    => $rh_args->{google_sensor}):()),
         ($rh_args->{google_client} ? ( client    => $rh_args->{google_client}):()),
     ));
     my $rh_response = $self->GOOGLE->reverse_geocode(latlng => $rh_args->{latlng});

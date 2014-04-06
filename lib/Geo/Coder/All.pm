@@ -22,6 +22,10 @@ has 'google_client' => (is=>'rw',isa=>'Str','default'=> '',reader=>'get_google_c
 
 has 'langauge' => (is=>'rw',isa=>'Str',init_arg=>'language',default=>'en',reader=>'get_language');
 has 'google_apiver' => (is=>'rw',isa=>'Num',init_arg=>'apiver',default=>3,reader=>'get_google_apiver');
+has 'google_encoding' => (is=>'rw',isa=>'Str',init_arg=>'google_encoding',default=>'utf8',reader=>'get_google_encoding');
+has 'google_country_code' => (is=>'rw',isa=>'Str',init_arg=>'google_country_code',default=>'',reader=>'get_google_country_code');
+has 'google_sensor' => (is=>'rw',isa=>'Str',init_arg=>'google_sensor',default=>'',reader=>'get_google_sensor');
+
 
 has 'geocoder_engine' => (
     is  => 'rw',
@@ -50,20 +54,24 @@ sub _build_geocoder_engine {
 
 around 'geocode' => sub{
     my ($orig,$class,$rh_args) =  @_;
-    $rh_args->{key}= $class->get_key if($class->get_key);
-    $rh_args->{language}= $class->get_language if($class->get_language);
-    $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Gooole');
-    $rh_args->{google_client}= $class->get_google_client if($class->geocoder eq 'Google');
-    return $class->$orig($rh_args);
+    return $class->$orig($class->_process_args($rh_args));
 };
+
 around 'reverse_geocode' => sub{
     my ($orig,$class,$rh_args) =  @_;
-    $rh_args->{key}= $class->get_key if($class->get_key);
-    $rh_args->{language}= $class->get_language if($class->get_language);
-    $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Google');
-    $rh_args->{google_client}= $class->get_google_client if($class->geocoder eq 'Google');
-    return $class->$orig($rh_args);
+    return $class->$orig($class->_process_args($rh_args));
 };
+#process the args passed to create new Geo::Coder::Google
+sub _process_args {
+    my ($self,$rh_args) =@_;
+    $rh_args->{key}= $self->get_key if($self->get_key);
+    $rh_args->{language}= $self->get_language if($self->get_language);
+    $rh_args->{google_apiver}= $self->get_google_apiver || $rh_args->{google_apiver} if($self->geocoder eq 'Gooole');
+    $rh_args->{google_client}= $self->get_google_client || $rh_args->{google_client} if($self->geocoder eq 'Google');
+    $rh_args->{google_encoding}= $self->get_google_encoding || $rh_args->{google_encoding} if($self->geocoder eq 'Google');
+    $rh_args->{google_country_code}= $self->get_google_country_code || $rh_args->{google_country_code} if($self->geocoder eq 'Google');
+    return $rh_args;
+}
 
 =head1 NAME
 
@@ -85,9 +93,10 @@ Quick summary of what the module does.
 Perhaps a little code snippet.
 
     use Geo::Coder::All;
-
-    my $geocoder = Geo::Coder::All->new();
-    ...
+    #For google geocoder
+    my $google_geocoder = Geo::Coder::All->new();#geocoder defaults to Google
+    my $google_geocoder = Geo::Coder::All->new( geocoder=>'Google',apiver=>3);
+    
 
 =head1 METHODS
 
@@ -99,6 +108,8 @@ if you don't export anything, such as for a purely object-oriented module.
 =item geocode
 
 geocode method
+for google geocoder
+    $geocoder = Geo::Coder::All->new( geocoder=>'Google',apiver=>3);
 
 =item reverse_geocode
 
