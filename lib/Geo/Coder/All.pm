@@ -60,8 +60,8 @@ around 'reverse_geocode' => sub{
 #process the args passed to create new Geo::Coder::Google
 sub _process_args {
     my ($self,$rh_args) =@_;
-    $rh_args->{key}= $self->get_key if($self->get_key);
-    $rh_args->{language}= $self->get_language if($self->get_language);
+    $rh_args->{key}         ||= $self->get_key;
+    $rh_args->{language}    ||= $self->get_language;
     $rh_args->{google_apiver}= $self->get_google_apiver || $rh_args->{apiver} if($self->geocoder eq 'Gooole');
     $rh_args->{google_client}= $self->get_google_client || $rh_args->{client} if($self->geocoder eq 'Google');
     $rh_args->{google_encoding}= $self->get_google_encoding || $rh_args->{encoding} if($self->geocoder eq 'Google');
