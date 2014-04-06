@@ -1,11 +1,11 @@
 package Geo::Coder::All;
 use Moose;
+use namespace::autoclean;
 use Geo::Coder::All::Google;
 use Geo::Coder::All::OSM;
 use Geo::Coder::All::TomTom;
 use Geo::Coder::All::Ovi;
 use Geo::Coder::All::Bing;
-use URI::Escape;
 use Data::Dumper;
 my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Google

@@ -1,10 +1,7 @@
 package Geo::Coder::All::Google;
-use Modern::Perl;
 use Moose;
 use namespace::autoclean;
 use Carp;
-use URI::Escape;
-use JSON::XS;
 use Locale::Codes::Country;
 use Data::Dumper;
 use Geo::Coder::Google;

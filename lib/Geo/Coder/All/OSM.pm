@@ -1,5 +1,4 @@
 package Geo::Coder::All::OSM;
-use Modern::Perl;
 use Moose;
 use namespace::autoclean;
 use Carp;
