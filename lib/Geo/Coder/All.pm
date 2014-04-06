@@ -56,6 +56,15 @@ around 'geocode' => sub{
     $rh_args->{google_client}= $class->get_google_client if($class->geocoder eq 'Google');
     return $class->$orig($rh_args);
 };
+around 'reverse_geocode' => sub{
+    my ($orig,$class,$rh_args) =  @_;
+    $rh_args->{key}= $class->get_key if($class->get_key);
+    $rh_args->{language}= $class->get_language if($class->get_language);
+    $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Google');
+    $rh_args->{google_client}= $class->get_google_client if($class->geocoder eq 'Google');
+    return $class->$orig($rh_args);
+};
+
 =head1 NAME
 
 Geo::Coder::All - The great new Geo::Coder::All!
