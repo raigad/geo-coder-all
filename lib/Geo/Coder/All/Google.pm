@@ -18,17 +18,7 @@ sub geocode_local {
     my ($self,$rh_args)= @_;
     croak "Location string needed" unless ($rh_args->{location});
     my $rh_data;
-    $self->set_google_geocoder(Geo::Coder::Google->new(
-        language    => $rh_args->{language},
-        apiver      => 3,
-        ($rh_args->{key} ? ( key    => $rh_args->{key}):()),
-        ($rh_args->{google_encoding} ? ( oe    => $rh_args->{google_encoding}):()),
-        ($rh_args->{google_country_code} ? ( region    => $rh_args->{google_country_code}):()),
-        ($rh_args->{google_sensor} ? ( sensor    => $rh_args->{google_sensor}):()),
-        ($rh_args->{google_client} ? ( client    => $rh_args->{google_client}):()),
-        #TODO: findout why v2 does not work
-        #($rh_args->{google_apiver} ? (apiver => $rh_args->{google_apiver}): () ),
-    ));
+    $self->_make_google_geocoder($rh_args);
     my $rh_response = $self->GOOGLE->geocode(location => $rh_args->{location});
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
     return $self->_process_response($rh_response);
@@ -36,6 +26,13 @@ sub geocode_local {
 sub reverse_geocode_local{
     my ($self,$rh_args) = @_;
     croak 'latlng needed to reverse geocode' unless($rh_args->{latlng});
+    $self->_make_google_geocoder($rh_args);
+    my $rh_response = $self->GOOGLE->reverse_geocode(latlng => $rh_args->{latlng});
+    print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
+    return $self->_process_response($rh_response);
+}
+sub _make_google_geocoder {
+    my ($self,$rh_args)= @_;  
     $self->set_google_geocoder(Geo::Coder::Google->new(
         language    => $rh_args->{language},
         apiver      => 3,
@@ -45,9 +42,6 @@ sub reverse_geocode_local{
         ($rh_args->{google_sensor} ? ( sensor    => $rh_args->{google_sensor}):()),
         ($rh_args->{google_client} ? ( client    => $rh_args->{google_client}):()),
     ));
-    my $rh_response = $self->GOOGLE->reverse_geocode(latlng => $rh_args->{latlng});
-    print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
-    return $self->_process_response($rh_response);
 }
 #TODO:implement this method as private_method/protected using MooseX::Privacy
 sub _process_response {
