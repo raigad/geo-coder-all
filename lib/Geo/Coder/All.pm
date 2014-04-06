@@ -84,15 +84,25 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
+Geo::Coder::All is wrapper for other geocoder cpan modules such as Geo::Coder::Google,Geo::Coder::Bing,Geo::Coder::Ovi,Geo::Coder::OSM and Geo::Coder::TomTom. Geo::Coder::All provides common geocode output format for all geocoder.
 
     use Geo::Coder::All;
     #For google geocoder
-    my $google_geocoder = Geo::Coder::All->new();#geocoder defaults to Google
-    my $google_geocoder = Geo::Coder::All->new( geocoder=>'Google',apiver=>3);
-    
+    my $google_geocoder = Geo::Coder::All->new();#geocoder defaults to Geo::Coder::Google::V3
+    #You can also use optional params for google api
+    my $google_geocoder = Geo::Coder::All->new(key=>'GMAP_KEY',client=>'GMAP_CLIENT');
+
+    #For Bing 
+    my $bing_geocoder = Geo::Coder::All->new(geocoder=>'Bing',key=>'BING_API_KEY');
+
+    #For Ovi 
+    my $ovi_geocoder = Geo::Coder::All->new(geocoder=>'Ovi');
+
+    #For OSM 
+    my $osm_geocoder = Geo::Coder::All->new(geocoder=>'OSM');
+
+    #For TomTom 
+    my $tomtom_geocoder = Geo::Coder::All->new(geocoder=>'TomTom');
 
 =head1 METHODS
 
@@ -103,14 +113,28 @@ if you don't export anything, such as for a purely object-oriented module.
 
 =item geocode
 
-geocode method
-for google geocoder
-    $geocoder = Geo::Coder::All->new( geocoder=>'Google',apiver=>3);
+For Google geocoder , we can directly set the different geocoding options when calling geocode and reverse_geocode methods. (i.e If you use Geo::Coder::Google you will have to create new instance every single time you need to change geocoding options )
+    #Following will return London from United Kingdom
+    $rh_location = $google_geocoder->geocode({location => 'London'});
+    #With geocoding options 
+    #Following will return London from Canada as we used country_code => ca (country_code is ISO 3166-1 )
+    $rh_location = $google_geocoder->geocode({location => 'London',language=>'en',country_code=>'ca',encoding=>'utf8',sensor=>1});
+    #in spanish
+    $rh_location = $google_geocoder->geocode({location => 'London',language=>'es',country_code=>'ca',encoding=>'utf8',sensor=>1});
+    #default encodings is set to 'utf8' you can change to other such as 'latin1'
+    #You can also set DEGUB=>1 to dump raw response from the geocoder api
+
+
+You cal also set GMAO_KEY and GMAP_CLIENT directly from geocode/reverse_geocode method and it will just work
 
 =item reverse_geocode
 
-reverse_geocode method
+For Google reverse_geocoder 
 
+    $rh_location = $google_geocoder->reverse_geocode({latlng=>'51.508515,-0.1254872',language=>'en',encoding=>'utf8',sensor=>1})
+    #in spanish
+    $rh_location = $google_geocoder->reverse_geocode({latlng=>'51.508515,-0.1254872',language=>'es',encoding=>'utf8',sensor=>1})
+    
 =cut
 
 =back
