@@ -1,5 +1,4 @@
 package Geo::Coder::All;
-#use Modern::Perl;
 use Moose;
 use Geo::Coder::All::Google;
 use Geo::Coder::All::OSM;
@@ -8,7 +7,6 @@ use Geo::Coder::All::Ovi;
 use Geo::Coder::All::Bing;
 use URI::Escape;
 use Data::Dumper;
-#use Geo::Coder::Osm;
 my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Google
     OSM
@@ -16,16 +14,14 @@ my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Ovi
     Bing
 );
-has 'geocoder' => (is=>'rw',isa=>'Str','default'=> 'Google');
-has 'key' => (is=>'rw',isa=>'Str','default'=> '',reader=>'get_key');
-has 'google_client' => (is=>'rw',isa=>'Str','default'=> '',reader=>'get_google_client');
-
-has 'langauge' => (is=>'rw',isa=>'Str',init_arg=>'language',default=>'en',reader=>'get_language');
-has 'google_apiver' => (is=>'rw',isa=>'Num',init_arg=>'apiver',default=>3,reader=>'get_google_apiver');
-has 'google_encoding' => (is=>'rw',isa=>'Str',init_arg=>'google_encoding',default=>'utf8',reader=>'get_google_encoding');
-has 'google_country_code' => (is=>'rw',isa=>'Str',init_arg=>'google_country_code',default=>'',reader=>'get_google_country_code');
-has 'google_sensor' => (is=>'rw',isa=>'Str',init_arg=>'google_sensor',default=>'',reader=>'get_google_sensor');
-
+has 'geocoder'              => (is=>'rw',isa=>'Str',default=>'Google');
+has 'key'                   => (is=>'rw',isa=>'Str',default=>'',    reader=>'get_key');
+has 'langauge'              => (is=>'rw',isa=>'Str',default=>'en',  reader=>'get_language',             init_arg=>'language');
+has 'google_client'         => (is=>'rw',isa=>'Str',default=>'',    reader=>'get_google_client',        init_arg=>'client');
+has 'google_apiver'         => (is=>'rw',isa=>'Num',default=>3,     reader=>'get_google_apiver',        init_arg=>'apiver');
+has 'google_encoding'       => (is=>'rw',isa=>'Str',default=>'utf8',reader=>'get_google_encoding',      init_arg=>'encoding');
+has 'google_country_code'   => (is=>'rw',isa=>'Str',default=>'',    reader=>'get_google_country_code',  init_arg=>'country_code');
+has 'google_sensor'         => (is=>'rw',isa=>'Str',default=>'',    reader=>'get_google_sensor',        init_arg=>'sensor');
 
 has 'geocoder_engine' => (
     is  => 'rw',
@@ -66,10 +62,10 @@ sub _process_args {
     my ($self,$rh_args) =@_;
     $rh_args->{key}= $self->get_key if($self->get_key);
     $rh_args->{language}= $self->get_language if($self->get_language);
-    $rh_args->{google_apiver}= $self->get_google_apiver || $rh_args->{google_apiver} if($self->geocoder eq 'Gooole');
-    $rh_args->{google_client}= $self->get_google_client || $rh_args->{google_client} if($self->geocoder eq 'Google');
-    $rh_args->{google_encoding}= $self->get_google_encoding || $rh_args->{google_encoding} if($self->geocoder eq 'Google');
-    $rh_args->{google_country_code}= $self->get_google_country_code || $rh_args->{google_country_code} if($self->geocoder eq 'Google');
+    $rh_args->{google_apiver}= $self->get_google_apiver || $rh_args->{apiver} if($self->geocoder eq 'Gooole');
+    $rh_args->{google_client}= $self->get_google_client || $rh_args->{client} if($self->geocoder eq 'Google');
+    $rh_args->{google_encoding}= $self->get_google_encoding || $rh_args->{encoding} if($self->geocoder eq 'Google');
+    $rh_args->{google_country_code}= $self->get_google_country_code || $rh_args->{country_code} if($self->geocoder eq 'Google');
     return $rh_args;
 }
 
