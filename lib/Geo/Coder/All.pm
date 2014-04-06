@@ -52,7 +52,7 @@ around 'geocode' => sub{
     my ($orig,$class,$rh_args) =  @_;
     $rh_args->{key}= $class->get_key if($class->get_key);
     $rh_args->{language}= $class->get_language if($class->get_language);
-    $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Google');
+    $rh_args->{google_apiver}= $class->get_google_apiver if($class->geocoder eq 'Gooole');
     $rh_args->{google_client}= $class->get_google_client if($class->geocoder eq 'Google');
     return $class->$orig($rh_args);
 };
@@ -86,24 +86,27 @@ Perhaps a little code snippet.
 
     use Geo::Coder::All;
 
-    my $foo = Geo::Coder::All->new();
+    my $geocoder = Geo::Coder::All->new();
     ...
 
-=head1 EXPORT
+=head1 METHODS
 
 A list of functions that can be exported.  You can delete this section
 if you don't export anything, such as for a purely object-oriented module.
 
-=head1 SUBROUTINES/METHODS
+=over 2
 
-=head2 function1
+=item geocode
+
+geocode method
+
+=item reverse_geocode
+
+reverse_geocode method
 
 =cut
 
-=head2 function2
-
-=cut
-
+=back
 
 =head1 AUTHOR
 
