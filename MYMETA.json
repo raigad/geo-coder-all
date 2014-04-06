@@ -1,0 +1,51 @@
+{
+   "abstract" : "Geo::Coder::All",
+   "author" : [
+      "Rohit Deshmukh <raigad1630@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "ExtUtils::MakeMaker version 6.84, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Geo-Coder-All",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : "0",
+            "Data::Dumper" : "0",
+            "Geo::Coder::Bing" : "0.12",
+            "Geo::Coder::Google" : "0.14",
+            "Geo::Coder::OSM" : "0.03",
+            "Geo::Coder::Ovi" : "0.03",
+            "Geo::Coder::TomTom" : "0.03",
+            "Locale::Codes::Country" : "3.30",
+            "Moose" : "0",
+            "namespace::autoclean" : "0",
+            "perl" : "5.006"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "version" : "0.01"
+}
