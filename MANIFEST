@@ -1,4 +1,6 @@
 Makefile.PL
+META.yml
+META.json
 MANIFEST			This list of files
 README
 Changes
