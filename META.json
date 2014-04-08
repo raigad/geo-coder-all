@@ -46,6 +46,17 @@
          }
       }
    },
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/raigad/geo-coder-all/issues"
+      },
+      "homepage" : "http://search.cpan.org/~raigad/geo-coder-all-0.01/",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/raigad/geo-coder-all.git",
+         "web" : "https://github.com/raigad/geo-coder-all"
+      }
+   },
    "release_status" : "stable",
    "version" : "0.01"
 }

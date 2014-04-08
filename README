@@ -29,9 +29,10 @@ METHODS
 
 geocode
 
-For Google geocoder , we can directly set the different geocoding options when calling geocode and reverse_geocode methods. (i.e If you use Geo::Coder::Go    ogle you will have to create new instance every single time you need to change geocoding options )
-    #Following will return London from United Kingdom
+For Google geocoder , we can directly set the different geocoding options when calling geocode and reverse_geocode methods. i.e If you use Geo::Coder::Go    ogle you will have to create new instance every single time you need to change geocoding options 
+
     $rh_location = $google_geocoder->geocode({location => 'London'});
+    #Following will return London from United Kingdom
     #With geocoding options
     #Following will return London from Canada as we used country_code => ca (country_code is ISO 3166-1 )
     $rh_location = $google_geocoder->geocode({location => 'London',language=>'en',country_code=>'ca',encoding=>'utf8',sensor=>1});
@@ -41,7 +42,7 @@ For Google geocoder , we can directly set the different geocoding options when c
     #You can also set DEGUB=>1 to dump raw response from the geocoder api
 
 
-You cal also set GMAO_KEY and GMAP_CLIENT directly from geocode/reverse_geocode method and it will just work
+You cal also set GMAP_KEY and GMAP_CLIENT directly from geocode/reverse_geocode method and it will just work
 
 reverse_geocode
 
@@ -66,22 +67,12 @@ SUPPORT AND DOCUMENTATION
 After installing, you can find documentation for this module with the
 perldoc command.
 
-    perldoc Geo::Coder::All
+	perldoc Geo::Coder::All
 
-You can also look for information at:
+Issues
+	https://github.com/raigad/geo-coder-all/issues
 
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Geo-Coder-All
-
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Geo-Coder-All
-
-    CPAN Ratings
-        http://cpanratings.perl.org/d/Geo-Coder-All
-
-    Search CPAN
-        http://search.cpan.org/dist/Geo-Coder-All/
-
+	
 
 LICENSE AND COPYRIGHT
 

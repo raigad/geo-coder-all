@@ -114,19 +114,19 @@ Geo::Coder::All offers geocode and reverse_geocode methods
 
 =item geocode
 
-For Google geocoder , we can directly set the different geocoding options when calling geocode and reverse_geocode methods. (i.e If you use Geo::Coder::Google you will have to create new instance every single time you need to change geocoding options )
-    #Following will return London from United Kingdom
+For Google geocoder , we can directly set the different geocoding options when calling geocode and reverse_geocode methods. i.e If you use Geo::Coder::Google you will have to create new instance every single time you need to change geocoding options
+
     $rh_location = $google_geocoder->geocode({location => 'London'});
+    #above will return London from United Kingdom
     #With geocoding options 
-    #Following will return London from Canada as we used country_code => ca (country_code is ISO 3166-1 )
+    #Following will return London from Canada as we used country_code is  ca (country_code is ISO 3166-1 )
     $rh_location = $google_geocoder->geocode({location => 'London',language=>'en',country_code=>'ca',encoding=>'utf8',sensor=>1});
     #in spanish
     $rh_location = $google_geocoder->geocode({location => 'London',language=>'es',country_code=>'ca',encoding=>'utf8',sensor=>1});
     #default encodings is set to 'utf8' you can change to other such as 'latin1'
     #You can also set DEGUB=>1 to dump raw response from the geocoder api
 
-
-You cal also set GMAO_KEY and GMAP_CLIENT directly from geocode/reverse_geocode method and it will just work
+You cal also set GMAP_KEY and GMAP_CLIENT directly from geocode/reverse_geocode method and it will just work
 
 =item reverse_geocode
 
@@ -140,10 +140,7 @@ For Google reverse_geocoder
 =back
 
 =head1 SEE ALSO
-=over 1
-=item geocoders
     Geo::Coder::Many,Geo::Coder::Google,Geo::Coder::Bing,Geo::Coder::Ovi,Geo::Coder::OSM and Geo::Coder::TomTom
-=back
 
 =head1 AUTHOR
 
@@ -152,41 +149,14 @@ Rohit Deshmukh, C<< <raigad1630 at gmail.com> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-geo-coder-all at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Geo-Coder-All>.  I will be notified, and then you'll
+the web interface at L<https://github.com/raigad/geo-coder-all/issues>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
-
-
-
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
     perldoc Geo::Coder::All
-
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker (report bugs here)
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Geo-Coder-All>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/Geo-Coder-All>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Geo-Coder-All>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/Geo-Coder-All/>
-
-=back
-
 
 =head1 ACKNOWLEDGEMENTS
 
