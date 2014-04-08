@@ -25,11 +25,6 @@
             "Test::More" : "0"
          }
       },
-      "configure" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
       "runtime" : {
          "requires" : {
             "Carp" : "0",
