@@ -3,7 +3,10 @@ META.yml
 META.json
 MANIFEST			This list of files
 README
+README.md
+ignore.txt
 Changes
+LICENSE
 lib/Geo/Coder/All.pm
 lib/Geo/Coder/All/Bing.pm
 lib/Geo/Coder/All/Google.pm
