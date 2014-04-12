@@ -15,9 +15,9 @@ is($location->{geocoder},'Google','checking geocoder');
 is($location->{country},'United Kingdom','checking country');
 is($location->{country_code},'GB','checking country code ');
 is($location->{country_code_alpha_3},'GBR','checking country code alpha3');
-is($location->{address},'Anfield, Anfield Rd, Liverpool, Merseyside L4 0TH','checking address');
-is($location->{coordinates}{lat},'53.4302988','checking latitude');
-is($location->{coordinates}{lon},'-2.9616045','checking longitude');
+like($location->{address},qr/Anfield.*L4\s+0TH/i,'checking address');
+like($location->{coordinates}{lat},qr/53.4/,'checking latitude');
+like($location->{coordinates}{lon},qr/-2.9/,'checking longitude');
 }
 
 
