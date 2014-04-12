@@ -1,10 +1,9 @@
-geo-coder-all
-=============
 ##geo-coder-all
 Geo::Coder::All - Geo::Coder::All
 Version 0.03
    * Meta CPAN: https://metacpan.org/pod/Geo::Coder::All
    * CPAN: http://search.cpan.org/~raigad/geo-coder-all/
+
 ##DESCRIPTION
 Geo::Coder::All is wrapper for other geocoder cpan modules such as Geo::Coder::Google,Geo::Coder::Bing,Geo::Coder::Ovi,Geo::Coder::OSM and Geo::Coder::TomTom. Geo::Coder::All provides common geocode output format for all geocoder.
 
@@ -31,7 +30,7 @@ my $tomtom_geocoder = Geo::Coder::All->new(geocoder=>'TomTom');
 
 ##METHODS
 Geo::Coder::All offers geocode and reverse_geocode methods
- * geocode 
+ * geocode -  
   For Google geocoder , we can directly set the different geocoding
   options when calling geocode and reverse_geocode methods. i.e If you
   use Geo::Coder::Google you will have to create new instance every
