@@ -31,4 +31,4 @@ resources:
   bugtracker: https://github.com/raigad/geo-coder-all/issues
   homepage: http://search.cpan.org/~raigad/geo-coder-all/
   repository: git://github.com/raigad/geo-coder-all.git
-version: 0.02
+version: 0.03

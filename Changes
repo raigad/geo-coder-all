@@ -1,5 +1,7 @@
 Revision history for Geo-Coder-All
 
+0.03    12 April 2014
+	Updated test cases to use regex to match address returned by geocoder	
 0.02    8 April 2014
 	updated pod 
 0.01    6 March 2014

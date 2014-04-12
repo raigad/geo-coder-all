@@ -35,7 +35,7 @@ WriteMakefile(
                     "bugtracker" => {
                                "web" => "https://github.com/raigad/geo-coder-all/issues"
                         },
-                    "homepage" => "ehttp://search.cpan.org/~raigad/geo-coder-all/",
+                    "homepage" => "http://search.cpan.org/~raigad/geo-coder-all/",
                     repository  => {
                                 type => 'git',
                                 url => 'git://github.com/raigad/geo-coder-all.git',
