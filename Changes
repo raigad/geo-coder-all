@@ -1,5 +1,7 @@
 Revision history for Geo-Coder-All
-
+0.04	4 October 2014
+	- Allowed lazy loading for geocoders. by default only Geo::Coder::Google is listed as dep. if you need any other supported geo coder then you will have to install as required.
+	- Now if you wanted to use geocoder that is not supported here then you can specify fully qualified class name for your custom wrapper.
 0.03    12 April 2014
 	Updated test cases to use regex to match address returned by geocoder	
 0.02    8 April 2014

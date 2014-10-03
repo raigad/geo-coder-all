@@ -1,12 +1,8 @@
 package Geo::Coder::All;
 use Moose;
 use namespace::autoclean;
-use Geo::Coder::All::Google;
-use Geo::Coder::All::OSM;
-use Geo::Coder::All::TomTom;
-use Geo::Coder::All::Ovi;
-use Geo::Coder::All::Bing;
-use Data::Dumper;
+use Module::Runtime qw(require_module);
+
 my %VALID_GEOCODER_LIST = map { $_ => 1} qw(
     Google
     OSM
@@ -39,12 +35,13 @@ sub _build_geocoder_engine {
     my $self        = shift;
     my $geocoder    = $self->geocoder;
     
-    unless($VALID_GEOCODER_LIST{$geocoder}){
+    if(!$VALID_GEOCODER_LIST{$geocoder} && $geocoder !~ /::/ ){
         $geocoder = 'Google';
         $self->geocoder('Google');
     }
     
-    my $class = 'Geo::Coder::All::'.$geocoder;
+    my $class = ($geocoder =~ /::/ ? $geocoder : 'Geo::Coder::All::'.$geocoder);
+    require_module($class);
     return $class->new(); 
 }
 
@@ -75,16 +72,18 @@ Geo::Coder::All - Geo::Coder::All
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 DESCRIPTION
 
 Geo::Coder::All is wrapper for other geocoder cpan modules such as Geo::Coder::Google,Geo::Coder::Bing,Geo::Coder::Ovi,Geo::Coder::OSM and Geo::Coder::TomTom. Geo::Coder::All provides common geocode output format for all geocoder.
+
+By default only Geo::Coder::Google is listed as dependency for this module. if you need any other supported geo coder then you will have to install them as required.
 
 =head1 SYNOPSIS
 
@@ -105,6 +104,15 @@ Geo::Coder::All is wrapper for other geocoder cpan modules such as Geo::Coder::G
 
     #For TomTom 
     my $tomtom_geocoder = Geo::Coder::All->new(geocoder=>'TomTom');
+
+    #Currently supported geocoders are
+    Geo::Coder::Google
+    Geo::Coder::Bing
+    Geo::Coder::TomTom
+    Geo::Coder::Ovi
+    Geo::Coder::OSM
+
+    #IF you want use geocder that is not listed above then you can now specify fully qualified class wrapper name to add your own custom handling for response. Please have look at how Geo::Coder::All::Google is working.
 
 =head1 METHODS
 
@@ -159,6 +167,7 @@ You can find documentation for this module with the perldoc command.
     perldoc Geo::Coder::All
 
 =head1 ACKNOWLEDGEMENTS
+Peter Sergeant, C<< <sargie@cpan.org> >>
 
 =head1 LICENSE AND COPYRIGHT
 

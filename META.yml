@@ -18,11 +18,7 @@ no_index:
 requires:
   Carp: 0
   Data::Dumper: 0
-  Geo::Coder::Bing: 0.12
-  Geo::Coder::Google: 0.14
-  Geo::Coder::OSM: 0.03
-  Geo::Coder::Ovi: 0.03
-  Geo::Coder::TomTom: 0.03
+  Geo::Coder::Google: 0
   Locale::Codes::Country: 3.30
   Moose: 0
   namespace::autoclean: 0
@@ -31,4 +27,4 @@ resources:
   bugtracker: https://github.com/raigad/geo-coder-all/issues
   homepage: http://search.cpan.org/~raigad/geo-coder-all/
   repository: git://github.com/raigad/geo-coder-all.git
-version: 0.03
+version: 0.04
