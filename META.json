@@ -30,6 +30,11 @@
             "Carp" : "0",
             "Data::Dumper" : "0",
             "Geo::Coder::Google" : "0",
+            "Geo::Coder::OSM" : "0",
+            "Geo::Coder::TomTom" : "0",
+            "Geo::Coder::Bing" : "0",
+            "Geo::Coder::Ovi" : "0",
+            "Module::Runtime" : "0",
             "Locale::Codes::Country" : "3.30",
             "Moose" : "0",
             "namespace::autoclean" : "0",
@@ -49,5 +54,5 @@
          "web" : "https://github.com/raigad/geo-coder-all"
       }
    },
-   "version" : "0.04"
+   "version" : "0.05"
 }

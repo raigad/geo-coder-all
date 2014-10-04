@@ -24,6 +24,11 @@ WriteMakefile(
         'Carp'                      => 0,
         'Locale::Codes::Country'    => '3.30',
         'Geo::Coder::Google'        => '0',
+        'Geo::Coder::Bing'          => '0',
+        'Geo::Coder::OSM'           => '0',
+        'Geo::Coder::Ovi'           => '0',
+        'Geo::Coder::TomTom'        => '0',
+        'Module::Runtime'           => '0',
     },
     META_MERGE  => {
         "meta-spec" => { version => 2 },

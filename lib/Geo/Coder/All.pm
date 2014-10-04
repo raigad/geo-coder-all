@@ -72,18 +72,17 @@ Geo::Coder::All - Geo::Coder::All
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 =head1 DESCRIPTION
 
 Geo::Coder::All is wrapper for other geocoder cpan modules such as Geo::Coder::Google,Geo::Coder::Bing,Geo::Coder::Ovi,Geo::Coder::OSM and Geo::Coder::TomTom. Geo::Coder::All provides common geocode output format for all geocoder.
 
-By default only Geo::Coder::Google is listed as dependency for this module. if you need any other supported geo coder then you will have to install them as required.
 
 =head1 SYNOPSIS
 
@@ -167,6 +166,7 @@ You can find documentation for this module with the perldoc command.
     perldoc Geo::Coder::All
 
 =head1 ACKNOWLEDGEMENTS
+
 Peter Sergeant, C<< <sargie@cpan.org> >>
 
 =head1 LICENSE AND COPYRIGHT
