@@ -3,6 +3,7 @@ Revision history for Perl module Geo::Coder::All
 0.06 2014-12-??
     - Deleted META.yml and META.json, so they'll be regenerated every time
       you build a release, which ensure up-to-date entries.
+    - Made the SEE ALSO entries be links to the relevant modules.
     - Reformatted this file as per CPAN::Changes::Spec
 
 0.05 2014-10-04

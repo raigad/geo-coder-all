@@ -143,11 +143,16 @@ For Google reverse_geocoder
     #in spanish
     $rh_location = $google_geocoder->reverse_geocode({latlng=>'51.508515,-0.1254872',language=>'es',encoding=>'utf8',sensor=>1})
     
-=cut
 =back
 
 =head1 SEE ALSO
-    Geo::Coder::Many,Geo::Coder::Google,Geo::Coder::Bing,Geo::Coder::Ovi,Geo::Coder::OSM and Geo::Coder::TomTom
+
+L<Geo::Coder::Many>,
+L<Geo::Coder::Google>,
+L<Geo::Coder::Bing>,
+L<Geo::Coder::Ovi>,
+L<Geo::Coder::OSM> and 
+L<Geo::Coder::TomTom>.
 
 =head1 AUTHOR
 
