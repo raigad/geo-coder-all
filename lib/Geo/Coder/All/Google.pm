@@ -43,6 +43,7 @@ sub _make_google_geocoder {
 #TODO:implement this method as private_method/protected using MooseX::Privacy
 sub _process_response {
     my ($self,$rh_response) = @_;
+    return undef unless($rh_response);
     my $rh_data;
     $rh_data->{geocoder}        = 'Google';
     $rh_data->{address}         = $rh_response->{formatted_address} ;

@@ -29,6 +29,7 @@ sub reverse_geocode_local{
 }
 sub _process_response{
     my ($self,$rh_response ) = @_;
+    return undef unless($rh_response);
     my $rh_data;
     $rh_data->{geocoder}        = 'Bing';
     return $rh_data unless($rh_response->{address});

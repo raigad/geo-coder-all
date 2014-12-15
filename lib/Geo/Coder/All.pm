@@ -72,11 +72,11 @@ Geo::Coder::All - Geo::Coder::All
 
 =head1 VERSION
 
-Version 0.05
+Version 0.05_01
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.05_01';
 
 
 =head1 DESCRIPTION
@@ -104,12 +104,13 @@ Geo::Coder::All is wrapper for other geocoder cpan modules such as Geo::Coder::G
     #For TomTom 
     my $tomtom_geocoder = Geo::Coder::All->new(geocoder=>'TomTom');
 
-    #Currently supported geocoders are
+    #Currently supported geocoders are 
     Geo::Coder::Google
     Geo::Coder::Bing
     Geo::Coder::TomTom
     Geo::Coder::Ovi
     Geo::Coder::OSM
+    #only Geo::Coder::Google is installed by default if you need to use other then you should install them manually
 
     #IF you want use geocder that is not listed above then you can now specify fully qualified class wrapper name to add your own custom handling for response. Please have look at how Geo::Coder::All::Google is working.
 
