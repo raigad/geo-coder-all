@@ -1,6 +1,6 @@
 ##geo-coder-all
 Geo::Coder::All - Geo::Coder::All
-Version 0.03
+Version 0.06
    * Meta CPAN: https://metacpan.org/pod/Geo::Coder::All
    * CPAN: http://search.cpan.org/~raigad/geo-coder-all/
 
