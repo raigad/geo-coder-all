@@ -11,8 +11,13 @@ if($@){
     exit;
 }
 
+unless($ENV{TOMTOM_API_KEY}){
+    plan skip_all => "No TomTom Api key provided skipping tests for TomTom Geocoder,SET ENV variable TOMTOM_API_KEY=key";
+    exit;
+}
+
 {
-my $geocoder = Geo::Coder::All->new(geocoder =>'TomTom');
+my $geocoder = Geo::Coder::All->new(geocoder =>'TomTom',key=>$ENV{TOMTOM_API_KEY});
 my $rh_location =$geocoder->geocode({location=> 'Anfield,Liverpool'});
 if(!$rh_location){
     plan skip_all => "Response from Geo Coder TomTom is undef";

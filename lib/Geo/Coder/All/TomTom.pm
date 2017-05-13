@@ -10,12 +10,15 @@ with 'Geo::Coder::Role::Geocode';
 has 'TomTom' => (
     is      =>  'ro',
     isa     =>  'Geo::Coder::TomTom',
-    default => sub{ Geo::Coder::TomTom->new();}
+    writer => 'set_tomtom_geocoder',
+    #default => sub{ Geo::Coder::TomTom->new();}
 );
 
 sub geocode_local {
     my ($self,$rh_args) = @_;
+    croak "TomTom API key required" unless ($rh_args->{key});
     croak "Location string required" unless ($rh_args->{location});
+    $self->set_tomtom_geocoder(Geo::Coder::TomTom->new( apikey => $rh_args->{key}));
     my $rh_response = $self->TomTom->geocode(location => $rh_args->{location} );
     print STDERR Dumper($rh_response) if($rh_args->{DEBUG});
     return $self->_process_response($rh_response);
