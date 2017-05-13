@@ -3,6 +3,14 @@ use strict;
 use warnings;
 use Test::More;
 use Geo::Coder::All;
+use Module::Runtime qw(require_module);
+eval { require_module('Geo::Coder::Google') };
+
+if($@){
+  plan skip_all => "Google geocoder tests as I can not find Geo::Coder::Google.";
+  exit;
+}
+
 plan tests => 8;
 {
 my $geocoder = Geo::Coder::All->new(apiver =>3,
