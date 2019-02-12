@@ -10,6 +10,10 @@ if($@){
   plan skip_all => "Google geocoder tests as I can not find Geo::Coder::Google.";
   exit;
 }
+if(!$ENV{GMAP_KEY}){
+  plan skip_all => "Google geocoder keys not specified. Please set ENV variable GMAP_KEY";
+  exit;
+}
 
 plan tests => 8;
 {
