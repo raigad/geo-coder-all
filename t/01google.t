@@ -21,7 +21,7 @@ my $geocoder = Geo::Coder::All->new(apiver =>3,
     ($ENV{GMAP_KEY} ?(key=> $ENV{GMAP_KEY}):()) ,
     ($ENV{GMAP_CLIENT} ?(client=> $ENV{GMAP_CLIENT}):()) ,
 );
-my $location =$geocoder->geocode({location=> 'Anfield,Liverpool'});
+my $location =$geocoder->geocode({location=> 'Anfield,Liverpool,UK'});
 isa_ok($geocoder->geocoder_engine->GOOGLE,'Geo::Coder::Google::V3');
 is($location->{geocoder},'Google','checking geocoder');
 is($location->{country},'United Kingdom','checking country');
